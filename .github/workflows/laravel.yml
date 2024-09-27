@@ -7,51 +7,9 @@ on:
 
 jobs:
   laravel-test:
-    runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:16
-        env:
-          POSTGRES_USER: root
-          POSTGRES_PASSWORD: root
-          POSTGRES_DB: laravel
-        ports:
-          - 5432:5432
-        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+    # runs-on: ubuntu-latest
+    runs-on: macos-13
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.7
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          extensions: mbstring, bcmath, pdo, pdo_pgsql, imagick, swoole, pdo, pdo_mysql
-
-      - name: Install Composer Dependencies
-        run: composer install --no-ansi --no-interaction --no-progress --no-suggest
-
-      - name: Set App
-        run: cp .env.example .env
-
-      - name: Generate Key
-        run: php artisan key:generate
-
-      - name: Run Test
-        id: test
-        run: php artisan test
-
-      # - name: deploy
-      #   if: steps.test.outcome == 'success'
-      #   run: ls
-
-      - name: Artifac
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: composer.json
-
-
-
+      - name: LS
+        run: ls -la
