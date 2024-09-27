@@ -43,9 +43,15 @@ jobs:
         id: test
         run: php artisan test
 
-      - name: deploy
-        if: steps.test.outcome == 'success'
-        run: ls
+      # - name: deploy
+      #   if: steps.test.outcome == 'success'
+      #   run: ls
+
+      - name: Artifac
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: composer.json
 
 
 
